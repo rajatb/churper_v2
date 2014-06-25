@@ -174,7 +174,6 @@ TweetCell * _stubCell;
     NSNumber *lastObjectId = (tweet.id ==nil)? [NSNumber numberWithInt:0] :tweet.id;
     [self.twitterClient homeTimeLineWithCount:[NSNumber numberWithInt:20] sinceId:[NSNumber numberWithInt:0] maxId:lastObjectId Success:^(AFHTTPRequestOperation *operation, NSArray *tweets) {
         
-        //        [self.twitterClient homeTimeLineWithSuccess:^(AFHTTPRequestOperation *operation, NSArray *tweets) {
         [self.tweets addObjectsFromArray:tweets];
         [self endRefresh];
         [self.tableView reloadData];
