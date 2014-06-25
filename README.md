@@ -5,11 +5,14 @@ Time spent:  24 hours spent in total
 
 Completed User Stories: 
 
-- [x] Required: Can view a list of movies from Rotten Tomatoes. Poster images loaded ansync.
-- [x] Required: User can view movie details by tapping on a cell
-- [x] Required: User sees loading state while waiting for movies API. 
-- [x] Required: User sees error message when there's a networking error. (not shown in the gif but it slides down)
-- [x] Required: User can pull to refresh the movie list. 
+- [x] User can sign in using OAuth login flow.
+- [x] User can view last 20 tweets from their home timeline
+- [x] The current signed in user will be persisted across restarts 
+- [x] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.  In other words, design the custom cell with the proper Auto Layout settings.  You will also need to augment the model classes.
+- [x] User can pull to refresh 
+- [x] User can compose a new tweet by tapping on a compose button.
+- [x] User can tap on a tweet to view it, with controls to retweet, favorite, and reply 
+
 
 Optional
 - [x] Optional: All images fade in 
