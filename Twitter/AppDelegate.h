@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+extern NSString *const UserWantsToReplyNotification;
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

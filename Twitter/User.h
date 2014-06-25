@@ -7,7 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Mantle/Mantle.h>
 
-@interface User : NSObject
+extern NSString *const UserDidLoginNotification;
+extern NSString *const UserDidLogoutNotification;
+
+@interface User : MTLModel <MTLJSONSerializing>
+
+
+@property(strong,nonatomic) NSString *name;
+@property(strong,nonatomic) NSString *screen_name;
+@property(strong,nonatomic) NSString *profile_image_url;
+
++ (NSArray*) userWithArray:(NSArray*) array;
++ (User *)userWithDictionary:(NSDictionary *)userDict;
++ (User *)currentUser;
++ (void)setCurrentUser:(User *)user;
 
 @end

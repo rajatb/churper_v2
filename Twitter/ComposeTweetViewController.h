@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tweet.h"
 
-@interface ComposeTweetViewController : UIViewController
+extern NSString *const UserReplyTweetNotification;
 
+@interface ComposeTweetViewController : UIViewController <UITextViewDelegate>
+@property(nonatomic,strong) Tweet *tweet; 
 @end

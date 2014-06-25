@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TweetTimelineViewController : UIViewController
+@interface TweetTimelineViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
