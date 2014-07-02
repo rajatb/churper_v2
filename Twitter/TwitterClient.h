@@ -8,6 +8,7 @@
 
 #import "BDBOAuth1RequestOperationManager.h"
 #import "Tweet.h"
+#import "User.h"
 
 @interface TwitterClient : BDBOAuth1RequestOperationManager
 
@@ -17,6 +18,9 @@
 -(AFHTTPRequestOperation *) homeTimeLine;
 -(AFHTTPRequestOperation *) homeTimeLineWithSuccess:(void (^)(AFHTTPRequestOperation *operation, NSArray *tweets))success
                                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(AFHTTPRequestOperation *) mentionsWithSuccess:(void (^)(AFHTTPRequestOperation *operation, NSArray *tweets))success
+                                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 -(AFHTTPRequestOperation *) currentUserWithFailure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
@@ -30,6 +34,16 @@
 -(void) defavoriteWithTweetId:(NSNumber *)tweetId failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 -(AFHTTPRequestOperation *) homeTimeLineWithCount:(NSNumber*)num sinceId:(NSNumber*)sinceId maxId:(NSNumber*)maxId Success:(void (^)(AFHTTPRequestOperation *operation, NSArray *tweets))success
-                                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure; 
+                                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+
+-(AFHTTPRequestOperation *) userTimeWithScreenName:(NSString*)screenName success:(void (^)(AFHTTPRequestOperation *operation, NSArray *tweets))success
+                                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(AFHTTPRequestOperation *) getBanner:(NSString*)screenName success:(void (^)(AFHTTPRequestOperation *operation, NSString *url))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+-(AFHTTPRequestOperation *) userLookupWithScreenName:(NSString*)screenName success:(void (^)(AFHTTPRequestOperation *operation, User *user))success
+                                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure; 
 
 @end

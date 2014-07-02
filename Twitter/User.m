@@ -15,6 +15,7 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
+             @"bannerImageUrl": @"profile_banner_url",
             // @"dateCreated":          @"created_at",
             // @"screenName" :          @"screen_name",
              //@"profileImageUrl":    @"profile_image_url",

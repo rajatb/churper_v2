@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeftNavViewController">
+            <connections>
+                <outlet property="lblName" destination="cc1-ga-STv" id="JUf-QV-qB0"/>
+                <outlet property="lblScreenName" destination="Z5A-eE-Xhn" id="gt6-SI-wvB"/>
+                <outlet property="leftNavigationMenuTbl" destination="E5U-c2-iTm" id="qwQ-70-LeL"/>
+                <outlet property="profileImageView" destination="VAT-Vd-d1N" id="6Pu-zJ-SO0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="E5U-c2-iTm">
+                    <rect key="frame" x="0.0" y="153" width="320" height="448"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAT-Vd-d1N">
+                    <rect key="frame" x="9" y="53" width="74" height="74"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="74" id="2lO-aS-jVt"/>
+                        <constraint firstAttribute="height" constant="74" id="jib-1X-1Ub"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rajat Bhargava" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cc1-ga-STv" userLabel="name - Label">
+                    <rect key="frame" x="91" y="53" width="103" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Rajat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5A-eE-Xhn">
+                    <rect key="frame" x="91" y="73" width="41" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="E5U-c2-iTm" secondAttribute="trailing" id="5MK-ks-UOw"/>
+                <constraint firstAttribute="bottom" secondItem="E5U-c2-iTm" secondAttribute="bottom" constant="-33" id="7Kd-GS-fmP"/>
+                <constraint firstItem="cc1-ga-STv" firstAttribute="leading" secondItem="VAT-Vd-d1N" secondAttribute="trailing" constant="8" id="8P2-Rg-GBV"/>
+                <constraint firstItem="E5U-c2-iTm" firstAttribute="top" secondItem="cc1-ga-STv" secondAttribute="bottom" constant="82" id="Ar8-xK-tWB"/>
+                <constraint firstItem="Z5A-eE-Xhn" firstAttribute="leading" secondItem="VAT-Vd-d1N" secondAttribute="trailing" constant="8" id="CLU-Fm-8Ti"/>
+                <constraint firstItem="VAT-Vd-d1N" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="9" id="OTl-KP-4Gi"/>
+                <constraint firstItem="cc1-ga-STv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="53" id="awD-Vh-Wal"/>
+                <constraint firstItem="VAT-Vd-d1N" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="53" id="eRH-Qr-X6f"/>
+                <constraint firstItem="E5U-c2-iTm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fht-Dr-Bgh"/>
+                <constraint firstItem="Z5A-eE-Xhn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="73" id="uH1-gI-RsS"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NavigationDelegate.h"
+#import "LeftNavViewController.h"
 
 @interface TweetTimelineViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, weak) id <NavigationDelegate> delegate;
+-(void)showDataFor:(NSInteger)menuSelection;
+-(id) initWithMenuSelection:(MENU_SELECTION)menuSelection;
 
 @end

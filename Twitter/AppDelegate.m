@@ -15,12 +15,14 @@
 #import "UIColor+Expanded.h"
 #import "ComposeTweetViewController.h"
 #import "Tweet.h"
+#import "MainViewController.h"
 
 @interface AppDelegate()
 
-@property(strong, nonatomic) UINavigationController *currentVC;
+@property(strong, nonatomic) UIViewController *currentVC;
 @property(strong, nonatomic) TweetTimelineViewController *tweetTimeLineVC;
 @property(strong, nonatomic) LoginViewController *loginVC;
+@property(strong, nonatomic) MainViewController *mainVC;
 
 @end
 
@@ -60,7 +62,8 @@ NSString *const UserWantsToReplyNotification = @"UserWantsToReplyNotification";
     
     
     [self setAppearance];
-
+   // LeftNavViewController *leftNav = [[LeftNavViewController alloc]init];
+    //self.window.rootViewController = leftNav;
     self.window.rootViewController = self.currentVC;
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -68,14 +71,15 @@ NSString *const UserWantsToReplyNotification = @"UserWantsToReplyNotification";
     return YES;
 }
 
--(UINavigationController*) currentVC {
-    UINavigationController *nvc;
+-(UIViewController*) currentVC {
+    UIViewController *vc;
     if([User currentUser]){
-        nvc = [[UINavigationController alloc] initWithRootViewController:self.tweetTimeLineVC];
+       // nvc = [[UINavigationController alloc] initWithRootViewController:self.tweetTimeLineVC];
+        vc = self.mainVC;
     } else {
-        nvc = [[UINavigationController alloc] initWithRootViewController:self.loginVC];
+        vc = self.loginVC; 
     }
-    return nvc;
+    return vc;
 }
 
 -(TweetTimelineViewController*) tweetTimeLineVC {
@@ -92,6 +96,14 @@ NSString *const UserWantsToReplyNotification = @"UserWantsToReplyNotification";
         _loginVC = [[LoginViewController alloc] init];
     });
     return _loginVC;
+}
+
+-(MainViewController *) mainVC {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _mainVC = [[MainViewController alloc] init];
+    });
+    return _mainVC;
 }
 
 -(void) updateRootVCToCurrentVC {

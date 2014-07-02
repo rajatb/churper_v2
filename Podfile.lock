@@ -27,6 +27,7 @@ PODS:
   - Mantle/extobjc (1.5)
   - MHPrettyDate (1.1.1)
   - SVProgressHUD (1.0)
+  - UIImageEffects (0.0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.2.0)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - Mantle
   - MHPrettyDate (~> 1.1.1)
   - SVProgressHUD
+  - UIImageEffects (~> 0.0.1)
 
 SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
@@ -43,5 +45,6 @@ SPEC CHECKSUMS:
   Mantle: c67a7e45e14196ed42b2a7cbb98ff6a9920e6b92
   MHPrettyDate: d9f42f2ec3dfece6352f18ac77aa33312174e09e
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  UIImageEffects: 69cd1e1f8fc4042a8fefcf4a0727cbf213e4dbfb
 
 COCOAPODS: 0.33.1

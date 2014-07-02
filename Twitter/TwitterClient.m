@@ -63,6 +63,30 @@
     
 }
 
+-(AFHTTPRequestOperation *) mentionsWithSuccess:(void (^)(AFHTTPRequestOperation *operation, NSArray *tweets))success
+                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    return [self GET:@"1.1/statuses/mentions_timeline.json" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *tweetsFromJSON = responseObject;
+        NSArray *tweets = [Tweet tweetsWithArray:tweetsFromJSON];
+        success(operation, tweets);
+    } failure:failure];
+    
+}
+
+-(AFHTTPRequestOperation *) userTimeWithScreenName:(NSString*)screenName success:(void (^)(AFHTTPRequestOperation *operation, NSArray *tweets))success
+                                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSDictionary *param = @{@"screen_name": screenName};
+    
+    return [self GET:@"1.1/statuses/user_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *tweetsFromJSON = responseObject;
+        NSArray *tweets = [Tweet tweetsWithArray:tweetsFromJSON];
+        success(operation, tweets);
+    } failure:failure];
+    
+}
+
 
 -(AFHTTPRequestOperation *) homeTimeLineWithCount:(NSNumber*)num sinceId:(NSNumber*)sinceId maxId:(NSNumber*)maxId Success:(void (^)(AFHTTPRequestOperation *operation, NSArray *tweets))success
                                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
@@ -77,6 +101,8 @@
     } failure:failure];
     
 }
+
+
 
 #pragma mark - User API
 
@@ -145,6 +171,35 @@
     [self POST:@"1.1/favorites/destroy.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Tweet UnFavorited!");
     } failure:failure];
+}
+
+
+-(AFHTTPRequestOperation *) getBanner:(NSString*)screenName success:(void (^)(AFHTTPRequestOperation *operation, NSString *url))success
+                                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSDictionary *param = @{@"screen_name": screenName};
+    
+    return [self GET:@"1.1/users/profile_banner.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSDictionary *banner = responseObject;
+        NSLog(@"ResponseObject%@",responseObject[@"sizes"][@"mobile_retina"]);
+        NSString *url = responseObject[@"sizes"][@"mobile_retina"][@"url"];
+        success(operation, url);
+    } failure:failure];
+    
+}
+
+-(AFHTTPRequestOperation *) userLookupWithScreenName:(NSString*)screenName success:(void (^)(AFHTTPRequestOperation *operation, User *user))success
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSDictionary *param = @{@"screen_name": screenName};
+    
+    return [self GET:@"1.1/users/lookup.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSDictionary *banner = responseObject;
+        NSLog(@"ResponseObject%@",responseObject);
+        NSArray *user = [User userWithArray:responseObject];
+        success(operation, user[0]);
+    } failure:failure];
+    
 }
 
 

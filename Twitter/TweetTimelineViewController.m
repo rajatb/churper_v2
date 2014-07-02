@@ -15,6 +15,8 @@
 #import "ComposeTweetViewController.h"
 #import "SVProgressHUD.h"
 #import "DetailTweetViewController.h"
+#import "ProfileViewController.h"
+
 
 
 @interface TweetTimelineViewController ()
@@ -25,8 +27,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(nonatomic,strong)UIRefreshControl *refreshControl;
 @property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic, assign)MENU_SELECTION menuSelection;
 
-- (void) loadTweets;
+
+- (void) loadData;
 @end
 
 @implementation TweetTimelineViewController
@@ -64,7 +68,7 @@ TweetCell * _stubCell;
     NSLog(@"View Did load");
     
     [self showProgressWithStatus];
-    [self loadTweets];
+    [self loadData];
     
     
     
@@ -83,13 +87,16 @@ TweetCell * _stubCell;
 
 - (void)configureNavigationBar
 {
-    UIBarButtonItem *signOut = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(goToSignOut:)];
-    self.navigationItem.leftBarButtonItem = signOut;
+    //UIBarButtonItem *signOut = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(goToSignOut:)];
+    //self.navigationItem.leftBarButtonItem = signOut;
+    
+    UIBarButtonItem *hamburger = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(goToLeftView)];
+    self.navigationItem.leftBarButtonItem = hamburger;
     
     UIBarButtonItem *new = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(goToNew:)];
     self.navigationItem.rightBarButtonItem = new;
     
-    self.navigationItem.title = @"Home";
+    self.navigationItem.title = @"Timeline";
 }
 
 -(IBAction)goToSignOut:(id)sender {
@@ -117,6 +124,12 @@ TweetCell * _stubCell;
    
     TweetCell *tweetCell = [self.tableView dequeueReusableCellWithIdentifier:@"tweetCell"];
     tweetCell.tweet = self.tweets[indexPath.row];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onUserImageTap:)];
+    tapGestureRecognizer.numberOfTapsRequired =1;
+    [tweetCell.tweetImage addGestureRecognizer:tapGestureRecognizer];
+    tweetCell.tweetImage.userInteractionEnabled = YES;
+    tweetCell.tweetImage.tag = indexPath.row;
     return tweetCell;
     
 //    UITableViewCell *cell = [[UITableViewCell alloc]init];
@@ -166,6 +179,40 @@ TweetCell * _stubCell;
             NSLog(@"Could not load tweets.%@", error.description);
         }];
   
+}
+
+- (void) loadMentions {
+    [self.twitterClient mentionsWithSuccess:^(AFHTTPRequestOperation *operation, NSArray *tweets) {
+        [self.tweets addObjectsFromArray:tweets];
+        [self endRefresh];
+        [self.tableView reloadData];
+        [self dismissProgress];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Could not load tweets.%@", error.description);
+    }];
+    
+}
+
+-(void)loadData {
+    switch (self.menuSelection) {
+        case TIME_LINE:{
+            self.navigationItem.title = @"Timeline";
+            [self loadTweets];
+        }
+            break;
+        case MENTIONS:{
+            NSLog(@"In Mentions!");
+            self.navigationItem.title = @"Mentions";
+            [self loadMentions];
+        } break; 
+            
+        default: {
+            NSLog(@"In default load tweets loading");
+            [self loadTweets];
+        }
+            break;
+    }
 }
 
 - (void) reloadNextTweets {
@@ -223,6 +270,41 @@ TweetCell * _stubCell;
     Tweet *tweet = (Tweet*)notification.userInfo[@"tweet"];
     [self.tweets insertObject:tweet atIndex:0];
     [self.tableView reloadData];
+    
+}
+
+-(void)goToLeftView {
+    [self.delegate goToLeftView];
+}
+
+-(void)showTimeLine {
+    [self loadData];
+}
+
+-(void)showMentions {
+    [self loadData];
+}
+
+-(void)showDataFor:(NSInteger)menuSelection {
+    NSLog(@"I am in show Mentions Menu Selection");
+    [self loadData];
+}
+
+-(id)initWithMenuSelection:(MENU_SELECTION)menuSelection {
+    self = [super init];
+    if(self){
+        self.menuSelection = menuSelection;
+    }
+    return self; 
+}
+
+-(void)onUserImageTap:(UITapGestureRecognizer*)tapGestureRecongizer {
+    NSLog(@"I was tapped!");
+    ProfileViewController *pvc = [[ProfileViewController alloc]init];
+    
+    NSLog(@"tag:%ld",(long)tapGestureRecongizer.view.tag);
+    pvc.tweetForProfile = self.tweets[tapGestureRecongizer.view.tag];
+    [self.navigationController pushViewController:pvc animated:YES];
     
 }
 

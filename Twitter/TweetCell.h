@@ -13,6 +13,7 @@
 
 @interface TweetCell : UITableViewCell
 
-@property(strong, nonatomic) Tweet *tweet; 
+@property(strong, nonatomic) Tweet *tweet;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetImage;
 
 @end
