@@ -32,4 +32,6 @@ MHPrettyDate  - Awesome for dates!!
 
 Description of the project:
 
-Project Twitter APIs to login using Oauth. After login it calls the APIs to get the data and do basic twitter functionality of creating a tweet, retweet, reply and favorite.  
+Project Twitter APIs to login using Oauth. After login it calls the APIs to get the data and do basic twitter functionality of creating a tweet, retweet, reply and favorite. 
+
+![Alt Text](TwitterRedux.gif)
