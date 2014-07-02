@@ -19,7 +19,7 @@ Profile page
 
 Home Timeline
 
-- [x]Tapping on a user image should bring up that user's profile page
+- [x] Tapping on a user image should bring up that user's profile page
 
 Account switching (optional)
 - [ ] Long press on tab bar to bring up Account view with animation
